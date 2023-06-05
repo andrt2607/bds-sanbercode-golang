@@ -1,0 +1,6 @@
+Data Peserta Bootcamp Digital Skill - Golang Backend Development
+1. Nama: Alif Andarta Al Falah
+2. Email: alifandarta26@gmail.com
+3. Sistem Operasi yang digunakan: Win 11
+4. Akun Gitlab/Github: alifandartaa
+5. Akun Telegram: alifandarta
