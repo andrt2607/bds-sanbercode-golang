@@ -22,7 +22,7 @@ func main() {
 	var convertTinggi, _ = strconv.Atoi(tinggiSegitiga)
 
 	var kelilingPersegiPanjang int = 2 * (convertPanjang + convertLebar)
-	var luasSegitiga int = 1 / 3 * convertAlas * convertTinggi
+	var luasSegitiga int = 1 / 2 * convertAlas * convertTinggi
 
 	fmt.Println(luasPersegiPanjang)
 	fmt.Println(kelilingPersegiPanjang)
