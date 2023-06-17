@@ -3,36 +3,36 @@ package main
 import (
 	"fmt"
 
-	. "./hitung"
+	ht "tugas9/Hitung"
 	// _ "./hitung"
 )
 
 func main() {
 	//soal 1
-	var tes1 HitungBangunDatar
+	var tes1 ht.HitungBangunDatar
 
-	tes1 = SegitigaSamaSisi{Alas: 2, Tinggi: 4}
+	tes1 = ht.SegitigaSamaSisi{Alas: 2, Tinggi: 4}
 	fmt.Println("luas ss : ", tes1.Luas())
 	fmt.Println("keliling ss : ", tes1.Keliling())
 
-	tes1 = PersegiPanjang{Panjang: 2, Lebar: 4}
+	tes1 = ht.PersegiPanjang{Panjang: 2, Lebar: 4}
 	fmt.Println("luas pp : ", tes1.Luas())
 	fmt.Println("keliling pp : ", tes1.Keliling())
 
-	var tes2 HitungBangunRuang
+	var tes2 ht.HitungBangunRuang
 
-	tes2 = Tabung{JariJari: 7, Tinggi: 5}
+	tes2 = ht.Tabung{JariJari: 7, Tinggi: 5}
 	fmt.Printf("\nvolume tb: %.2f\n", tes2.Volume())
 	fmt.Println("luas permukaan tb: ", tes2.LuasPermukaan())
 
-	tes2 = Balok{Panjang: 7, Lebar: 4, Tinggi: 5}
+	tes2 = ht.Balok{Panjang: 7, Lebar: 4, Tinggi: 5}
 	fmt.Println("volume bl: ", tes2.Volume())
 	fmt.Println("luas permukaan bl: ", tes2.LuasPermukaan())
 
 	//soal 2
-	var tes3 MyInterface
+	var tes3 ht.MyInterface
 
-	tes3 = Phone{
+	tes3 = ht.Phone{
 		Name:   "pocom4",
 		Brand:  "xiaomi",
 		Year:   2023,
@@ -44,13 +44,13 @@ func main() {
 	//soal 3
 
 	fmt.Println("ini batas")
-	fmt.Println(LuasPersegi(4, true))
+	fmt.Println(ht.LuasPersegi(4, true))
 
-	fmt.Println(LuasPersegi(8, false))
+	fmt.Println(ht.LuasPersegi(8, false))
 
-	fmt.Println(LuasPersegi(0, true))
+	fmt.Println(ht.LuasPersegi(0, true))
 
-	fmt.Println(LuasPersegi(0, false))
+	fmt.Println(ht.LuasPersegi(0, false))
 
 	//soal 4
 	var prefix interface{} = "hasil penjumlahan dari "

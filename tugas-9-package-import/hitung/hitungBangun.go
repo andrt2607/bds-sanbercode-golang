@@ -1,4 +1,4 @@
-package hitung
+package Hitung
 
 import (
 	"fmt"
