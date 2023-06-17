@@ -80,19 +80,19 @@ func TestDefer(kalimat string, tahun int) {
 }
 
 // soal 2
-func kelilingSegitigaSamaSisi(sisi int, boolValue bool) interface{} {
+func kelilingSegitigaSamaSisi(sisi int, boolValue bool) (string, error) {
 	result := 4 * 3
 	if boolValue == true && sisi == 0 {
-		// defer TestDefer("Golang Backend Development", 2021)
+		defer TestDefer("Golang Backend Development", 2021)
 		panic("Maaf anda belum menginput sisi dari segitiga sama sisi")
 	} else if boolValue == true {
-		return "keliling segitiga sama sisinya dengan sisi " + strconv.Itoa(sisi) + " cm adalah " + strconv.Itoa(result) + " cm"
+		return "keliling segitiga sama sisinya dengan sisi " + strconv.Itoa(sisi) + " cm adalah " + strconv.Itoa(result) + " cm", nil
 	} else if boolValue == false && sisi == 0 {
 		defer TestDefer("Golang Backend Development", 2021)
 		panic("Maaf anda belum menginput sisi dari segitiga sama sisi")
 
 	}
-	return strconv.Itoa(result)
+	return strconv.Itoa(result), nil
 }
 
 // soal 3
