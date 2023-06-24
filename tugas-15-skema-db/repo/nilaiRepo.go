@@ -8,8 +8,8 @@ import (
 	"log"
 	"math/rand"
 	"time"
-	config "tugas14/Config"
-	"tugas14/models"
+	config "tugas15/Config"
+	"tugas15/models"
 )
 
 const (
