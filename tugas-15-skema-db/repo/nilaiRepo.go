@@ -13,7 +13,7 @@ import (
 )
 
 const (
-	table          = "mahasiswa"
+	table          = "nilai"
 	layoutDateTime = "2006-01-02 15:04:05"
 )
 
@@ -40,12 +40,12 @@ func GetAllNilai(ctx context.Context) ([]models.Nilai, error) {
 		var createdAt, updatedAt string
 		if err = rowQuery.Scan(
 			&nilai.ID,
-			&nilai.Nama,
-			&nilai.MataKuliah,
-			&nilai.IndeksNilai,
-			&nilai.Nilai,
+			&nilai.Indeks,
+			&nilai.Skor,
 			&createdAt,
 			&updatedAt,
+			&nilai.MahasiswaId,
+			&nilai.MataKuliahId,
 		); err != nil {
 			return nil, err
 		}
@@ -75,19 +75,19 @@ func Insert(ctx context.Context, nilai models.Nilai) error {
 		log.Fatal("Cant connect to mySQL", err)
 	}
 	switch {
-	case nilai.Nilai >= 80:
-		nilai.IndeksNilai = "A"
-	case nilai.Nilai >= 70 && nilai.Nilai < 80:
-		nilai.IndeksNilai = "B"
-	case nilai.Nilai >= 60 && nilai.Nilai < 70:
-		nilai.IndeksNilai = "C"
-	case nilai.Nilai >= 50 && nilai.Nilai < 60:
-		nilai.IndeksNilai = "D"
-	case nilai.Nilai < 80:
-		nilai.IndeksNilai = "E"
+	case nilai.Skor >= 80:
+		nilai.Indeks = "A"
+	case nilai.Skor >= 70 && nilai.Skor < 80:
+		nilai.Indeks = "B"
+	case nilai.Skor >= 60 && nilai.Skor < 70:
+		nilai.Indeks = "C"
+	case nilai.Skor >= 50 && nilai.Skor < 60:
+		nilai.Indeks = "D"
+	case nilai.Skor < 80:
+		nilai.Indeks = "E"
 	}
 	nilai.ID = uint(rand.Intn(1000))
-	query := fmt.Sprintf("INSERT INTO %v (id, name, mata_kuliah, indeks_nilai, nilai, created_at, updated_at) values ('%v','%v','%v','%v','%v', NOW(), NOW())", table, nilai.ID, nilai.Nama, nilai.MataKuliah, nilai.IndeksNilai, nilai.Nilai)
+	query := fmt.Sprintf("INSERT INTO %v (indeks, skor, created_at, updated_at, mahasiswa_id, mata_kuliah_id) values ('%v',%v,NOW(), NOW(), %v, %v)", table, nilai.Indeks, nilai.Skor, nilai.MahasiswaId, nilai.MataKuliahId)
 	_, err = db.ExecContext(ctx, query)
 
 	if err != nil {
@@ -102,7 +102,19 @@ func UpdateNilai(ctx context.Context, nilai models.Nilai, id int) error {
 	if err != nil {
 		log.Fatal("cant connect to mysql", err)
 	}
-	query := fmt.Sprintf("UPDATE %v set name = '%v', mata_kuliah = '%v', nilai = %v , updated_at = NOW() where id = %v", table, nilai.Nama, nilai.MataKuliah, nilai.Nilai, id)
+	switch {
+	case nilai.Skor >= 80:
+		nilai.Indeks = "A"
+	case nilai.Skor >= 70 && nilai.Skor < 80:
+		nilai.Indeks = "B"
+	case nilai.Skor >= 60 && nilai.Skor < 70:
+		nilai.Indeks = "C"
+	case nilai.Skor >= 50 && nilai.Skor < 60:
+		nilai.Indeks = "D"
+	case nilai.Skor < 80:
+		nilai.Indeks = "E"
+	}
+	query := fmt.Sprintf("UPDATE %v set indeks = '%v', skor = %v, mahasiswa_id = %v , mata_kuliah_id = %v ,updated_at = NOW() where id = %v", table, nilai.Indeks, nilai.Skor, nilai.MahasiswaId, nilai.MataKuliahId, id)
 
 	_, err = db.ExecContext(ctx, query)
 	if err != nil {
